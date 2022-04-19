@@ -15,7 +15,7 @@ function checksExistsUserAccount(request, response, next) {
   const user = users.find((user) => user.username === username);
 
   if (!user) {
-    response.status(400).json({ error: "User not found" });
+    return response.status(400).json({ error: "User not found" });
   }
 
   request.user = user;
@@ -88,10 +88,12 @@ app.put(
     const { id } = request.params;
     const { user } = request;
 
+    //AS 3 FORMAS ABAIXO SÃO POSSÍVEIS!
+
     // 1º forma que pensei:
-    // const todoIndex = user.todos.findIndex((todo) => todo.id === id);
-    // user.todos[todoIndex].title = title;
-    // user.todos[todoIndex].deadline = new Date(deadline);
+    const todoIndex = user.todos.findIndex((todo) => todo.id === id);
+    user.todos[todoIndex].title = title;
+    user.todos[todoIndex].deadline = new Date(deadline);
 
     // 2º forma que pensei:
     // const todoIndex = user.todos.findIndex((todo) => todo.id === id);
@@ -102,16 +104,16 @@ app.put(
     // user.todos[todoIndex] = todo;
 
     // 3º forma que pensei:
-    const todoIndex = user.todos.findIndex((todo) => todo.id === id);
-    const todoList = user.todos.map((todo) =>
-      todo.id === id
-        ? { ...todo, title: title, deadline: new Date(deadline) }
-        : todo
-    );
+    // const todoIndex = user.todos.findIndex((todo) => todo.id === id);
+    // const todoList = user.todos.map((todo) =>
+    //   todo.id === id
+    //     ? { ...todo, title: title, deadline: new Date(deadline) }
+    //     : todo
+    // );
 
-    user.todos = todoList;
+    // user.todos = todoList;
 
-    response.status(200).json(user.todos[todoIndex]);
+    return response.status(200).json(user.todos[todoIndex]);
   }
 );
 
