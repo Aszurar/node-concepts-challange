@@ -89,6 +89,7 @@ app.put(
     const { user } = request;
 
     // 1º forma que pensei:
+    // const todoIndex = user.todos.findIndex((todo) => todo.id === id);
     // user.todos[todoIndex].title = title;
     // user.todos[todoIndex].deadline = new Date(deadline);
 
