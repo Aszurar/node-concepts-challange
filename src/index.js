@@ -37,7 +37,7 @@ function checkIfTodoAlreadyExists(request, response, next) {
   const todo = user.todos.find((todo) => todo.id === id);
 
   if (!todo) {
-    return response.status(404).json({ error: "User not found" });
+    return response.status(404).json({ error: "Todo dosen't exist" });
   }
 
   return next();
@@ -89,7 +89,6 @@ app.put(
     const { user } = request;
 
     // 1º forma que pensei:
-    // const todoIndex = user.todos.findIndex((todo) => todo.id === id);
     // user.todos[todoIndex].title = title;
     // user.todos[todoIndex].deadline = new Date(deadline);
 
@@ -102,6 +101,7 @@ app.put(
 
     // 2º forma que pensei:
 
+    const todoIndex = user.todos.findIndex((todo) => todo.id === id);
     const todoList = user.todos.map((todo) =>
       todo.id === id
         ? { ...todo, title: title, deadline: new Date(deadline) }
