@@ -94,14 +94,14 @@ app.put(
     // user.todos[todoIndex].deadline = new Date(deadline);
 
     // 2º forma que pensei:
+    // const todoIndex = user.todos.findIndex((todo) => todo.id === id);
     // const todo = user.todos.find((todo) => todo.id === todo.id);
     // todo.title = title;
     // todo.deadline = new Date(deadline);
 
     // user.todos[todoIndex] = todo;
 
-    // 2º forma que pensei:
-
+    // 3º forma que pensei:
     const todoIndex = user.todos.findIndex((todo) => todo.id === id);
     const todoList = user.todos.map((todo) =>
       todo.id === id
